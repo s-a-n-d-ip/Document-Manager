@@ -1,0 +1,10 @@
+[project]
+name = "pdfmanager"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "streamlit>=1.56.0",
+    "PyMuPDF==1.27.2.2",
+]
