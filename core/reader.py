@@ -2,7 +2,7 @@ import pymupdf
 import os
 
 class Pdf_Reader:
-
+    # This method converts a PDF file into a series of images, one for each page, and saves them in a folder named after the PDF file. It uses the PyMuPDF library to handle the PDF processing and image generation.
     def convert_pdf_to_images(self, file_path):
         folder_name=os.path.basename(file_path).replace('.pdf','')
         folder_path=os.path.join("storage","pdfs",folder_name)

@@ -20,3 +20,24 @@ class DocumentRepository:
             ))
         conn.commit()
         conn.close()
+    def search_documents(self, search_tag=None, search_date=None):
+        conn=create_connection()
+        cursor=conn.cursor()
+        params=[]
+        conditions=[]
+        if search_tag:
+            conditions.append("tags LIKE ?")
+            params.append(f"%{search_tag}%")
+        if search_date:
+            conditions.append("lecturer_date = ?")
+            params.append(search_date.strftime("%Y-%m-%d"))
+
+        if conditions:
+            query="SELECT * FROM documents WHERE "
+            query += "or".join(conditions)
+        cursor.execute(query, params)
+        results=cursor.fetchall()
+        conn.close()
+        for row in results:
+            print(row)
+        return [Document(*rows)for rows in results] # returning list of Document objects created from the query results
