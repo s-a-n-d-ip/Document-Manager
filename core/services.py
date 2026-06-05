@@ -39,3 +39,6 @@ class DocumentService:
     # This method allows searching for documents based on tags and/or lecture date by delegating the search operation to the DocumentRepository.
     def search_documents(self, search_tag=None, search_date=None):
         return self.document_repository.search_documents(search_tag, search_date)
+    
+    def get_all_documents(self):
+        return self.document_repository.get_all_documents()

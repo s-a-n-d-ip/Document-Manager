@@ -20,6 +20,7 @@ class DocumentRepository:
             ))
         conn.commit()
         conn.close()
+    # This method allows us to search for documents in the database based on tags and/or lecture date. It constructs a dynamic SQL query based on the provided search criteria and returns a list of Document objects that match the search.
     def search_documents(self, search_tag=None, search_date=None):
         conn=create_connection()
         cursor=conn.cursor()
@@ -41,3 +42,11 @@ class DocumentRepository:
         for row in results:
             print(row)
         return [Document(*rows)for rows in results] # returning list of Document objects created from the query results
+    #``
+    def get_all_documents(self):
+        conn=create_connection()
+        cursor=conn.cursor()
+        cursor.execute("SELECT * FROM documents")
+        results=cursor.fetchall()
+        conn.close()
+        return [Document(*rows) for rows in results]

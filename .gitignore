@@ -8,6 +8,8 @@ wheels/
 
 # Virtual environments
 .venv
+Pdfmanager/
 
 # Application data
 storage/
+Data/documents.db
