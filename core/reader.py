@@ -9,6 +9,7 @@ class Pdf_Reader:
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
         doc = pymupdf.open(file_path)
+
         images = []
         for i in range(len(doc)):
             page=doc.load_page(i)
@@ -17,5 +18,6 @@ class Pdf_Reader:
             images_path=os.path.join(folder_path,f"page_{i+1}.png")
             pix.save(images_path)
             images.append(images_path)
+            
         doc.close()
         return images

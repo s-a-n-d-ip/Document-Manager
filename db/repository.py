@@ -1,7 +1,8 @@
 from db.database import create_connection
 from core.models import Document
-class DocumentRepository:
-    
+
+class DocumentRepository: 
+    # This method allows us to add a new document to the database. It takes a Document object as input and inserts its attributes into the corresponding fields in the documents table of the database.
     def add_document(self, document:Document):
         conn=create_connection()
         cursor=conn.cursor()
@@ -20,6 +21,7 @@ class DocumentRepository:
             ))
         conn.commit()
         conn.close()
+
     # This method allows us to search for documents in the database based on tags and/or lecture date. It constructs a dynamic SQL query based on the provided search criteria and returns a list of Document objects that match the search.
     def search_documents(self, search_tag=None, search_date=None):
         conn=create_connection()
@@ -39,10 +41,9 @@ class DocumentRepository:
         cursor.execute(query, params)
         results=cursor.fetchall()
         conn.close()
-        for row in results:
-            print(row)
-        return [Document(*rows)for rows in results] # returning list of Document objects created from the query results
-    #``
+        return [Document(*rows)for rows in results] # returning list of Document objects
+    
+    # This method retrieves all documents from the database and returns them as a list of Document objects.
     def get_all_documents(self):
         conn=create_connection()
         cursor=conn.cursor()

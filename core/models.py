@@ -1,4 +1,5 @@
 class Document:
+    # This class represents a document with its associated metadata.
     def __init__(self,id,filename, path, thumbnail_path, tags, description, upload_date, lecture_date, total_pages):
         self.id = id
         self.filename = filename

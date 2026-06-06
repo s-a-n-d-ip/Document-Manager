@@ -8,8 +8,10 @@ from dotenv import load_dotenv
 BASE_DIR=os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(BASE_DIR)
 
+# Load environment variables from .env file to access the sensitive data
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 ADMIN_PASSWORD=os.getenv("ADMIN_PASSWORD")
+
 from db.database import init_db
 from core.services import DocumentService
 from core.analytics import AnalyticsService
@@ -31,6 +33,7 @@ if "selected_doc" not in st.session_state:
 if "current_page" not in st.session_state:
     st.session_state.current_page = 1
 
+# show_reset_button session state variable is used to track whether the user is currently in the process of resetting the application state.
 if "show_reset_button" not in st.session_state:
     st.session_state.show_reset_button = False
 
@@ -38,22 +41,26 @@ document_service = DocumentService()
 analytics_service = AnalyticsService()
 
 init_db()
+
 st.set_page_config(page_title="PDF Manager", page_icon="📚",layout="wide")
 st.title("📚 Modern PDF Manager")
 st.divider()
 
 # Admin Control section provides a button to clean the database and reset the application state. 
 st.subheader("⚙️ Admin Control")
+
 if st.button("🧹 Clean Database"):
     st.session_state.show_reset_button = True
+
 if st.session_state.show_reset_button:
     password=st.text_input("Enter admin password to reset analytics data:", type="password")
+
     if st.button("Confirm Reset"):
         if password == ADMIN_PASSWORD:
-
             import shutil
             # Remove the existing database file
             data_path=os.path.join("Data","documents.db")
+
             if os.path.exists(data_path):
                 os.remove(data_path)
 
@@ -82,6 +89,7 @@ if st.session_state.show_reset_button:
             st.rerun()
 
 tabs=st.tabs(["Upload","Search & View","Anyalitcs"])
+
 with tabs[0]:
     st.header("Upload PDF")
 

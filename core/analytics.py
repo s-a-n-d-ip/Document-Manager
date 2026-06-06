@@ -1,6 +1,9 @@
 from datetime import datetime
 from db.database import create_connection
+
 class AnalyticsService:
+
+    # Record a page visit in the database for a specific document and page number
     def record_page_visit(self, document_id, page_number):
         conn = create_connection()
         cursor = conn.cursor()
@@ -12,6 +15,7 @@ class AnalyticsService:
         conn.commit()
         conn.close()
 
+    # Get the total number of unique page visits for a specific document
     def get_page_visits(self, document_id):
         conn = create_connection()
         cursor = conn.cursor()
@@ -22,6 +26,7 @@ class AnalyticsService:
         conn.close()
         return visits if visits else 0
     
+    # Record an app visit in the database for a specific event type (e.g., 'next page', 'previous page')
     def record_app_visit(self, event_type):
         conn = create_connection()
         cursor = conn.cursor()
@@ -33,6 +38,7 @@ class AnalyticsService:
         conn.commit()
         conn.close()    
 
+    # Get the total number count for each event type
     def get_app_visits(self):
         conn = create_connection()
         cursor = conn.cursor()
@@ -43,6 +49,7 @@ class AnalyticsService:
         conn.close()
         return visits 
     
+    # Reset all analytics data by deleting all records from the page_visits and App_Visit tables
     def reset_analytics(self):
         conn = create_connection()
         cursor = conn.cursor()
