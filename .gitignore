@@ -10,6 +10,11 @@ wheels/
 .venv
 Pdfmanager/
 
+# Environment Variables
+.env
+
 # Application data
 storage/
 Data/documents.db
+
+

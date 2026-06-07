@@ -88,7 +88,7 @@ if st.session_state.show_reset_button:
             st.session_state.show_reset_button = False
             st.rerun()
 
-tabs=st.tabs(["Upload","Search & View","Anyalitcs"])
+tabs=st.tabs(["Upload","Search & View","Analytics"])
 
 with tabs[0]:
     st.header("Upload PDF")
